@@ -864,7 +864,7 @@ public class mainActivity extends Activity implements LocationListener {
 	public void getWeather(String City, String Country)
 			throws ParserConfigurationException, SAXException, IOException,
 			URISyntaxException {
-		
+
 		streetAddress = City;
 
 		City = City.replaceAll("á", "a");
