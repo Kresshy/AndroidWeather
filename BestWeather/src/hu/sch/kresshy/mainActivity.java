@@ -877,7 +877,10 @@ public class mainActivity extends Activity implements LocationListener {
 		URI uri = new URI("http",
 				"//api.wunderground.com/api/1581002a1df007d6/conditions/forecast/astronomy/q/"
 						+ Country + "/" + City + ".xml", null);
-		String request = uri.toASCIIString();
+//		String request = uri.toASCIIString();
+		
+		String request = uri.toString();
+		logToLogCat("mainActivity", "request: " + request);
 
 		URL url = new URL(request);
 
