@@ -21,9 +21,4 @@
         android:title="Loc by NET"
         android:icon="@android:drawable/ic_menu_share"/>
 
-    <item
-        android:id="@+id/help"
-        android:title="Help"
-        android:icon="@android:drawable/ic_menu_help"/>
-
 </menu>

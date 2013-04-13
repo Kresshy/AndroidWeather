@@ -142,28 +142,28 @@ public class mainActivity extends Activity implements LocationListener {
 	String high_day3S;
 	String high_day4S;
 
-//	int high_day1f;
-//	int high_day1c;
-//	int high_day2f;
-//	int high_day2c;
-//	int high_day3f;
-//	int high_day3c;
-//	int high_day4f;
-//	int high_day4c;
+	// int high_day1f;
+	// int high_day1c;
+	// int high_day2f;
+	// int high_day2c;
+	// int high_day3f;
+	// int high_day3c;
+	// int high_day4f;
+	// int high_day4c;
 
 	String low_day1S;
 	String low_day2S;
 	String low_day3S;
 	String low_day4S;
 
-//	int low_day1f;
-//	int low_day1c;
-//	int low_day2f;
-//	int low_day2c;
-//	int low_day3f;
-//	int low_day3c;
-//	int low_day4f;
-//	int low_day4c;
+	// int low_day1f;
+	// int low_day1c;
+	// int low_day2f;
+	// int low_day2c;
+	// int low_day3f;
+	// int low_day3c;
+	// int low_day4f;
+	// int low_day4c;
 
 	String tempS;
 	String descS;
@@ -174,7 +174,7 @@ public class mainActivity extends Activity implements LocationListener {
 	ProgressDialog dialog;
 
 	private final String DEFAULT_CITY = "Budapest";
-	
+
 	public static synchronized void logToLogCat(String TAG, String message) {
 		Log.i(TAG, message);
 	}
@@ -185,9 +185,10 @@ public class mainActivity extends Activity implements LocationListener {
 		setContentView(R.layout.main);
 		logToLogCat("mainActivity", "onCreate");
 
-//		startService(new Intent(getApplicationContext(), MyWidgetService.class));
-//		startService(new Intent(getApplicationContext(),
-//				EarthquakeService.class));
+		// startService(new Intent(getApplicationContext(),
+		// MyWidgetService.class));
+		// startService(new Intent(getApplicationContext(),
+		// EarthquakeService.class));
 
 		mainlayout = (LinearLayout) findViewById(R.id.background);
 
@@ -294,8 +295,8 @@ public class mainActivity extends Activity implements LocationListener {
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
 				mycalendar.getTimeInMillis(), 20 * 60 * 1000, pendingIntent);
 
-//		alarmManager.set(AlarmManager.RTC_WAKEUP,
-//				System.currentTimeMillis() + 1000, pendingIntent);
+		// alarmManager.set(AlarmManager.RTC_WAKEUP,
+		// System.currentTimeMillis() + 1000, pendingIntent);
 
 		EarthquakeService.SaveAlarmManager(alarmManager, pendingIntent);
 
@@ -456,12 +457,12 @@ public class mainActivity extends Activity implements LocationListener {
 		switch (requestCode) {
 		case REQUEST_GETADDRESS:
 			logToLogCat("mainActivity", "onActivityResult REQUEST_GETADDRESS");
-			
+
 			String toget = data.getStringExtra(getPackageName());
 			streetAddress = toget;
 
 			Editor e = sp.edit();
-			
+
 			if (streetAddress != null) {
 
 				e.putString("location", streetAddress);
@@ -476,7 +477,7 @@ public class mainActivity extends Activity implements LocationListener {
 				}
 
 			} else {
-				
+
 				e.putString("location", DEFAULT_CITY);
 				e.commit();
 				if (chkStatusNoNotify()) {
@@ -559,13 +560,6 @@ public class mainActivity extends Activity implements LocationListener {
 			}
 			return true;
 
-		case R.id.help:
-			
-			Intent myIntent2 = new Intent(getApplicationContext(),
-					helpActivity.class);
-			startActivity(myIntent2);
-
-			return true;
 		default:
 
 			return super.onOptionsItemSelected(item);
@@ -601,272 +595,272 @@ public class mainActivity extends Activity implements LocationListener {
 		// A VÁROSNÉVVEL VALÓ VISSZATÉRÉS AZ IDÕJÁRÁS ELKÉRÉSÉHEZ
 
 		LocInfo loc = new LocInfo();
-		
+
 		if (myList.get(0).getLocality() != null) {
 			logToLogCat("mainActivity", myList.get(0).getLocality());
 			loc.city = myList.get(0).getLocality();
 		}
-		
+
 		if (myList.get(0).getAdminArea() != null) {
 			logToLogCat("mainActivity", myList.get(0).getCountryName());
-//			return myList.get(0).getAdminArea();
+			// return myList.get(0).getAdminArea();
 			loc.AdminArea = myList.get(0).getCountryName();
 		}
-		
-		//logToLogCat("mainActivity", myList.get(0).getThoroughfare());
-		//loc.AdminArea = myList.get(0).getThoroughfare();
+
+		// logToLogCat("mainActivity", myList.get(0).getThoroughfare());
+		// loc.AdminArea = myList.get(0).getThoroughfare();
 		return loc;
 	}
 
-//	public void getWeather(String City) throws ParserConfigurationException,
-//			SAXException, IOException {
-//		
-//		logToLogCat("mainActivity", "getWeather");
-//
-//		// AZ XML FÁJL LEKÉRÉSE GOOGLE WEATHER APIRÓL A MEGFELELÕ VÁROSSAL
-//		// URLENCODEOLVA
-//
-//		String URLencodedCity = URLEncoder.encode(City);
-//
-//		URL url = new URL("http://www.google.com/ig/api?weather="
-//				+ URLencodedCity + "&hl=en");
-//
-//		// AZ XML FÁJL FELDOLGOZÁSA
-//
-//		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-//		DocumentBuilder db = dbf.newDocumentBuilder();
-//		Document doc = db.parse(new InputSource(url.openStream()));
-//		doc.getDocumentElement().normalize();
-//
-//		// A MEGFELELÕ IDÕJÁRÁS ELÕREJELZÉS ELKÉRÉSE
-//
-//		// JELENLEGI IDÕJÁRÁS
-//
-//		if (doc.getElementsByTagName("current_conditions") != null)
-//			current_conditions = doc.getElementsByTagName("current_conditions");
-//		else
-//			current_conditions = null;
-//
-//		// ELÕREJELZÉS
-//
-//		if (doc.getElementsByTagName("forecast_conditions") != null)
-//			forecast_conditions = doc
-//					.getElementsByTagName("forecast_conditions");
-//		else
-//			forecast_conditions = null;
-//
-//		// AZ ELÕREJELZÉS LEKÉRÉSE
-//
-//		if (forecast_conditions != null) {
-//			condition_day1 = ((Element) forecast_conditions.item(0))
-//					.getElementsByTagName("condition");
-//			condition_day2 = ((Element) forecast_conditions.item(1))
-//					.getElementsByTagName("condition");
-//			condition_day3 = ((Element) forecast_conditions.item(2))
-//					.getElementsByTagName("condition");
-//			condition_day4 = ((Element) forecast_conditions.item(3))
-//					.getElementsByTagName("condition");
-//
-//			name_day1 = ((Element) forecast_conditions.item(0))
-//					.getElementsByTagName("day_of_week");
-//			name_day2 = ((Element) forecast_conditions.item(1))
-//					.getElementsByTagName("day_of_week");
-//			name_day3 = ((Element) forecast_conditions.item(2))
-//					.getElementsByTagName("day_of_week");
-//			name_day4 = ((Element) forecast_conditions.item(3))
-//					.getElementsByTagName("day_of_week");
-//
-//			high_day1 = ((Element) forecast_conditions.item(0))
-//					.getElementsByTagName("high");
-//			high_day2 = ((Element) forecast_conditions.item(1))
-//					.getElementsByTagName("high");
-//			high_day3 = ((Element) forecast_conditions.item(2))
-//					.getElementsByTagName("high");
-//			high_day4 = ((Element) forecast_conditions.item(3))
-//					.getElementsByTagName("high");
-//
-//			low_day1 = ((Element) forecast_conditions.item(0))
-//					.getElementsByTagName("low");
-//			low_day2 = ((Element) forecast_conditions.item(1))
-//					.getElementsByTagName("low");
-//			low_day3 = ((Element) forecast_conditions.item(2))
-//					.getElementsByTagName("low");
-//			low_day4 = ((Element) forecast_conditions.item(3))
-//					.getElementsByTagName("low");
-//		} else {
-//			condition_day1 = null;
-//			condition_day2 = null;
-//			condition_day3 = null;
-//			condition_day4 = null;
-//
-//			name_day1 = null;
-//			name_day2 = null;
-//			name_day3 = null;
-//			name_day4 = null;
-//
-//			high_day1 = null;
-//			high_day2 = null;
-//			high_day3 = null;
-//			high_day4 = null;
-//
-//			low_day1 = null;
-//			low_day2 = null;
-//			low_day3 = null;
-//			low_day4 = null;
-//		}
-//
-//		if (((Element) condition_day1.item(0)).getAttribute("data") != null)
-//			condition_day1S = ((Element) condition_day1.item(0))
-//					.getAttribute("data");
-//		else
-//			condition_day1S = NA;
-//		if (((Element) condition_day2.item(0)).getAttribute("data") != null)
-//			condition_day2S = ((Element) condition_day2.item(0))
-//					.getAttribute("data");
-//		else
-//			condition_day2S = NA;
-//		if (((Element) condition_day3.item(0)).getAttribute("data") != null)
-//			condition_day3S = ((Element) condition_day3.item(0))
-//					.getAttribute("data");
-//		else
-//			condition_day3S = NA;
-//		if (((Element) condition_day4.item(0)).getAttribute("data") != null)
-//			condition_day4S = ((Element) condition_day4.item(0))
-//					.getAttribute("data");
-//		else
-//			condition_day4S = NA;
-//
-//		// String condition_day1S = ((Element)
-//		// condition_day1.item(0)).getAttribute("data");
-//		// String condition_day2S = ((Element)
-//		// condition_day2.item(0)).getAttribute("data");
-//		// String condition_day3S = ((Element)
-//		// condition_day3.item(0)).getAttribute("data");
-//		// String condition_day4S = ((Element)
-//		// condition_day4.item(0)).getAttribute("data");
-//
-//		if (((Element) name_day1.item(0)).getAttribute("data") != null)
-//			name_day1N = ((Element) name_day1.item(0)).getAttribute("data");
-//		else
-//			name_day1N = NA;
-//		if (((Element) name_day2.item(0)).getAttribute("data") != null)
-//			name_day2N = ((Element) name_day2.item(0)).getAttribute("data");
-//		else
-//			name_day2N = NA;
-//		if (((Element) name_day3.item(0)).getAttribute("data") != null)
-//			name_day3N = ((Element) name_day3.item(0)).getAttribute("data");
-//		else
-//			name_day3N = NA;
-//		if (((Element) name_day4.item(0)).getAttribute("data") != null)
-//			name_day4N = ((Element) name_day4.item(0)).getAttribute("data");
-//		else
-//			name_day4N = NA;
-//
-//		// String name_day1N = ((Element)
-//		// name_day1.item(0)).getAttribute("data");
-//		// String name_day2N = ((Element)
-//		// name_day2.item(0)).getAttribute("data");
-//		// String name_day3N = ((Element)
-//		// name_day3.item(0)).getAttribute("data");
-//		// String name_day4N = ((Element)
-//		// name_day4.item(0)).getAttribute("data");
-//
-//		if (((Element) high_day1.item(0)).getAttribute("data") != null)
-//			high_day1S = ((Element) high_day1.item(0)).getAttribute("data");
-//		else
-//			high_day1S = "0";
-//		if (((Element) high_day2.item(0)).getAttribute("data") != null)
-//			high_day2S = ((Element) high_day2.item(0)).getAttribute("data");
-//		else
-//			high_day2S = "0";
-//		if (((Element) high_day3.item(0)).getAttribute("data") != null)
-//			high_day3S = ((Element) high_day3.item(0)).getAttribute("data");
-//		else
-//			high_day3S = "0";
-//		if (((Element) high_day4.item(0)).getAttribute("data") != null)
-//			high_day4S = ((Element) high_day4.item(0)).getAttribute("data");
-//		else
-//			high_day4S = "0";
-//
-//		// String high_day1S = ((Element)
-//		// high_day1.item(0)).getAttribute("data");
-//		// String high_day2S = ((Element)
-//		// high_day2.item(0)).getAttribute("data");
-//		// String high_day3S = ((Element)
-//		// high_day3.item(0)).getAttribute("data");
-//		// String high_day4S = ((Element)
-//		// high_day4.item(0)).getAttribute("data");
-//
-//		high_day1f = Integer.parseInt(high_day1S);
-//		high_day1c = (high_day1f - 32) * 5 / 9;
-//		high_day2f = Integer.parseInt(high_day2S);
-//		high_day2c = (high_day2f - 32) * 5 / 9;
-//		high_day3f = Integer.parseInt(high_day3S);
-//		high_day3c = (high_day3f - 32) * 5 / 9;
-//		high_day4f = Integer.parseInt(high_day4S);
-//		high_day4c = (high_day4f - 32) * 5 / 9;
-//
-//		if (((Element) low_day1.item(0)).getAttribute("data") != null)
-//			low_day1S = ((Element) low_day1.item(0)).getAttribute("data");
-//		else
-//			low_day1S = "0";
-//		if (((Element) low_day2.item(0)).getAttribute("data") != null)
-//			low_day2S = ((Element) low_day2.item(0)).getAttribute("data");
-//		else
-//			low_day2S = "0";
-//		if (((Element) low_day3.item(0)).getAttribute("data") != null)
-//			low_day3S = ((Element) low_day3.item(0)).getAttribute("data");
-//		else
-//			low_day3S = "0";
-//		if (((Element) low_day4.item(0)).getAttribute("data") != null)
-//			low_day4S = ((Element) low_day4.item(0)).getAttribute("data");
-//		else
-//			low_day4S = "0";
-//
-//		// String low_day1S = ((Element) low_day1.item(0)).getAttribute("data");
-//		// String low_day2S = ((Element) low_day2.item(0)).getAttribute("data");
-//		// String low_day3S = ((Element) low_day3.item(0)).getAttribute("data");
-//		// String low_day4S = ((Element) low_day4.item(0)).getAttribute("data");
-//
-//		low_day1f = Integer.parseInt(low_day1S);
-//		low_day1c = (low_day1f - 32) * 5 / 9;
-//		low_day2f = Integer.parseInt(low_day2S);
-//		low_day2c = (low_day2f - 32) * 5 / 9;
-//		low_day3f = Integer.parseInt(low_day3S);
-//		low_day3c = (low_day3f - 32) * 5 / 9;
-//		low_day4f = Integer.parseInt(low_day4S);
-//		low_day4c = (low_day4f - 32) * 5 / 9;
-//
-//		// A JELENLEGI IDÕJÁRÁS LEKÉRÉSE
-//		// HA A JELENLEGI IDOJARAS NEM NULL
-//
-//		if (current_conditions != null) {
-//			temperature = ((Element) current_conditions.item(0))
-//					.getElementsByTagName("temp_c");
-//			condition = ((Element) current_conditions.item(0))
-//					.getElementsByTagName("condition");
-//			wind_con = ((Element) current_conditions.item(0))
-//					.getElementsByTagName("wind_condition");
-//			humidity = ((Element) current_conditions.item(0))
-//					.getElementsByTagName("humidity");
-//
-//			// A JELENLEGI IDÕJÁRÁS BEÁLLÍTÁSA
-//
-//			tempS = ((Element) temperature.item(0)).getAttribute("data") + "°C";
-//			descS = ((Element) condition.item(0)).getAttribute("data");
-//			windS = ((Element) wind_con.item(0)).getAttribute("data");
-//			humiS = ((Element) humidity.item(0)).getAttribute("data");
-//
-//		} else {
-//
-//			tempS = NA;
-//			descS = NA;
-//			windS = NA;
-//			humiS = NA;
-//		}
-//
-//	}
-	
+	// public void getWeather(String City) throws ParserConfigurationException,
+	// SAXException, IOException {
+	//
+	// logToLogCat("mainActivity", "getWeather");
+	//
+	// // AZ XML FÁJL LEKÉRÉSE GOOGLE WEATHER APIRÓL A MEGFELELÕ VÁROSSAL
+	// // URLENCODEOLVA
+	//
+	// String URLencodedCity = URLEncoder.encode(City);
+	//
+	// URL url = new URL("http://www.google.com/ig/api?weather="
+	// + URLencodedCity + "&hl=en");
+	//
+	// // AZ XML FÁJL FELDOLGOZÁSA
+	//
+	// DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	// DocumentBuilder db = dbf.newDocumentBuilder();
+	// Document doc = db.parse(new InputSource(url.openStream()));
+	// doc.getDocumentElement().normalize();
+	//
+	// // A MEGFELELÕ IDÕJÁRÁS ELÕREJELZÉS ELKÉRÉSE
+	//
+	// // JELENLEGI IDÕJÁRÁS
+	//
+	// if (doc.getElementsByTagName("current_conditions") != null)
+	// current_conditions = doc.getElementsByTagName("current_conditions");
+	// else
+	// current_conditions = null;
+	//
+	// // ELÕREJELZÉS
+	//
+	// if (doc.getElementsByTagName("forecast_conditions") != null)
+	// forecast_conditions = doc
+	// .getElementsByTagName("forecast_conditions");
+	// else
+	// forecast_conditions = null;
+	//
+	// // AZ ELÕREJELZÉS LEKÉRÉSE
+	//
+	// if (forecast_conditions != null) {
+	// condition_day1 = ((Element) forecast_conditions.item(0))
+	// .getElementsByTagName("condition");
+	// condition_day2 = ((Element) forecast_conditions.item(1))
+	// .getElementsByTagName("condition");
+	// condition_day3 = ((Element) forecast_conditions.item(2))
+	// .getElementsByTagName("condition");
+	// condition_day4 = ((Element) forecast_conditions.item(3))
+	// .getElementsByTagName("condition");
+	//
+	// name_day1 = ((Element) forecast_conditions.item(0))
+	// .getElementsByTagName("day_of_week");
+	// name_day2 = ((Element) forecast_conditions.item(1))
+	// .getElementsByTagName("day_of_week");
+	// name_day3 = ((Element) forecast_conditions.item(2))
+	// .getElementsByTagName("day_of_week");
+	// name_day4 = ((Element) forecast_conditions.item(3))
+	// .getElementsByTagName("day_of_week");
+	//
+	// high_day1 = ((Element) forecast_conditions.item(0))
+	// .getElementsByTagName("high");
+	// high_day2 = ((Element) forecast_conditions.item(1))
+	// .getElementsByTagName("high");
+	// high_day3 = ((Element) forecast_conditions.item(2))
+	// .getElementsByTagName("high");
+	// high_day4 = ((Element) forecast_conditions.item(3))
+	// .getElementsByTagName("high");
+	//
+	// low_day1 = ((Element) forecast_conditions.item(0))
+	// .getElementsByTagName("low");
+	// low_day2 = ((Element) forecast_conditions.item(1))
+	// .getElementsByTagName("low");
+	// low_day3 = ((Element) forecast_conditions.item(2))
+	// .getElementsByTagName("low");
+	// low_day4 = ((Element) forecast_conditions.item(3))
+	// .getElementsByTagName("low");
+	// } else {
+	// condition_day1 = null;
+	// condition_day2 = null;
+	// condition_day3 = null;
+	// condition_day4 = null;
+	//
+	// name_day1 = null;
+	// name_day2 = null;
+	// name_day3 = null;
+	// name_day4 = null;
+	//
+	// high_day1 = null;
+	// high_day2 = null;
+	// high_day3 = null;
+	// high_day4 = null;
+	//
+	// low_day1 = null;
+	// low_day2 = null;
+	// low_day3 = null;
+	// low_day4 = null;
+	// }
+	//
+	// if (((Element) condition_day1.item(0)).getAttribute("data") != null)
+	// condition_day1S = ((Element) condition_day1.item(0))
+	// .getAttribute("data");
+	// else
+	// condition_day1S = NA;
+	// if (((Element) condition_day2.item(0)).getAttribute("data") != null)
+	// condition_day2S = ((Element) condition_day2.item(0))
+	// .getAttribute("data");
+	// else
+	// condition_day2S = NA;
+	// if (((Element) condition_day3.item(0)).getAttribute("data") != null)
+	// condition_day3S = ((Element) condition_day3.item(0))
+	// .getAttribute("data");
+	// else
+	// condition_day3S = NA;
+	// if (((Element) condition_day4.item(0)).getAttribute("data") != null)
+	// condition_day4S = ((Element) condition_day4.item(0))
+	// .getAttribute("data");
+	// else
+	// condition_day4S = NA;
+	//
+	// // String condition_day1S = ((Element)
+	// // condition_day1.item(0)).getAttribute("data");
+	// // String condition_day2S = ((Element)
+	// // condition_day2.item(0)).getAttribute("data");
+	// // String condition_day3S = ((Element)
+	// // condition_day3.item(0)).getAttribute("data");
+	// // String condition_day4S = ((Element)
+	// // condition_day4.item(0)).getAttribute("data");
+	//
+	// if (((Element) name_day1.item(0)).getAttribute("data") != null)
+	// name_day1N = ((Element) name_day1.item(0)).getAttribute("data");
+	// else
+	// name_day1N = NA;
+	// if (((Element) name_day2.item(0)).getAttribute("data") != null)
+	// name_day2N = ((Element) name_day2.item(0)).getAttribute("data");
+	// else
+	// name_day2N = NA;
+	// if (((Element) name_day3.item(0)).getAttribute("data") != null)
+	// name_day3N = ((Element) name_day3.item(0)).getAttribute("data");
+	// else
+	// name_day3N = NA;
+	// if (((Element) name_day4.item(0)).getAttribute("data") != null)
+	// name_day4N = ((Element) name_day4.item(0)).getAttribute("data");
+	// else
+	// name_day4N = NA;
+	//
+	// // String name_day1N = ((Element)
+	// // name_day1.item(0)).getAttribute("data");
+	// // String name_day2N = ((Element)
+	// // name_day2.item(0)).getAttribute("data");
+	// // String name_day3N = ((Element)
+	// // name_day3.item(0)).getAttribute("data");
+	// // String name_day4N = ((Element)
+	// // name_day4.item(0)).getAttribute("data");
+	//
+	// if (((Element) high_day1.item(0)).getAttribute("data") != null)
+	// high_day1S = ((Element) high_day1.item(0)).getAttribute("data");
+	// else
+	// high_day1S = "0";
+	// if (((Element) high_day2.item(0)).getAttribute("data") != null)
+	// high_day2S = ((Element) high_day2.item(0)).getAttribute("data");
+	// else
+	// high_day2S = "0";
+	// if (((Element) high_day3.item(0)).getAttribute("data") != null)
+	// high_day3S = ((Element) high_day3.item(0)).getAttribute("data");
+	// else
+	// high_day3S = "0";
+	// if (((Element) high_day4.item(0)).getAttribute("data") != null)
+	// high_day4S = ((Element) high_day4.item(0)).getAttribute("data");
+	// else
+	// high_day4S = "0";
+	//
+	// // String high_day1S = ((Element)
+	// // high_day1.item(0)).getAttribute("data");
+	// // String high_day2S = ((Element)
+	// // high_day2.item(0)).getAttribute("data");
+	// // String high_day3S = ((Element)
+	// // high_day3.item(0)).getAttribute("data");
+	// // String high_day4S = ((Element)
+	// // high_day4.item(0)).getAttribute("data");
+	//
+	// high_day1f = Integer.parseInt(high_day1S);
+	// high_day1c = (high_day1f - 32) * 5 / 9;
+	// high_day2f = Integer.parseInt(high_day2S);
+	// high_day2c = (high_day2f - 32) * 5 / 9;
+	// high_day3f = Integer.parseInt(high_day3S);
+	// high_day3c = (high_day3f - 32) * 5 / 9;
+	// high_day4f = Integer.parseInt(high_day4S);
+	// high_day4c = (high_day4f - 32) * 5 / 9;
+	//
+	// if (((Element) low_day1.item(0)).getAttribute("data") != null)
+	// low_day1S = ((Element) low_day1.item(0)).getAttribute("data");
+	// else
+	// low_day1S = "0";
+	// if (((Element) low_day2.item(0)).getAttribute("data") != null)
+	// low_day2S = ((Element) low_day2.item(0)).getAttribute("data");
+	// else
+	// low_day2S = "0";
+	// if (((Element) low_day3.item(0)).getAttribute("data") != null)
+	// low_day3S = ((Element) low_day3.item(0)).getAttribute("data");
+	// else
+	// low_day3S = "0";
+	// if (((Element) low_day4.item(0)).getAttribute("data") != null)
+	// low_day4S = ((Element) low_day4.item(0)).getAttribute("data");
+	// else
+	// low_day4S = "0";
+	//
+	// // String low_day1S = ((Element) low_day1.item(0)).getAttribute("data");
+	// // String low_day2S = ((Element) low_day2.item(0)).getAttribute("data");
+	// // String low_day3S = ((Element) low_day3.item(0)).getAttribute("data");
+	// // String low_day4S = ((Element) low_day4.item(0)).getAttribute("data");
+	//
+	// low_day1f = Integer.parseInt(low_day1S);
+	// low_day1c = (low_day1f - 32) * 5 / 9;
+	// low_day2f = Integer.parseInt(low_day2S);
+	// low_day2c = (low_day2f - 32) * 5 / 9;
+	// low_day3f = Integer.parseInt(low_day3S);
+	// low_day3c = (low_day3f - 32) * 5 / 9;
+	// low_day4f = Integer.parseInt(low_day4S);
+	// low_day4c = (low_day4f - 32) * 5 / 9;
+	//
+	// // A JELENLEGI IDÕJÁRÁS LEKÉRÉSE
+	// // HA A JELENLEGI IDOJARAS NEM NULL
+	//
+	// if (current_conditions != null) {
+	// temperature = ((Element) current_conditions.item(0))
+	// .getElementsByTagName("temp_c");
+	// condition = ((Element) current_conditions.item(0))
+	// .getElementsByTagName("condition");
+	// wind_con = ((Element) current_conditions.item(0))
+	// .getElementsByTagName("wind_condition");
+	// humidity = ((Element) current_conditions.item(0))
+	// .getElementsByTagName("humidity");
+	//
+	// // A JELENLEGI IDÕJÁRÁS BEÁLLÍTÁSA
+	//
+	// tempS = ((Element) temperature.item(0)).getAttribute("data") + "°C";
+	// descS = ((Element) condition.item(0)).getAttribute("data");
+	// windS = ((Element) wind_con.item(0)).getAttribute("data");
+	// humiS = ((Element) humidity.item(0)).getAttribute("data");
+	//
+	// } else {
+	//
+	// tempS = NA;
+	// descS = NA;
+	// windS = NA;
+	// humiS = NA;
+	// }
+	//
+	// }
+
 	public void getWeather(String City, String Country)
 			throws ParserConfigurationException, SAXException, IOException,
 			URISyntaxException {
@@ -985,79 +979,80 @@ public class mainActivity extends Activity implements LocationListener {
 
 	}
 
-//	public void setData() {
-//		logToLogCat("mainActivity", "setData");
-//		runOnUiThread(new Runnable() {
-//			public void run() {
-//				Editor e = sp.edit();
-//				e.putString("weather", descS + DELIMITER + tempS + DELIMITER
-//						+ high_day1c + DELIMITER + low_day1c);
-//				e.putString("location", cityS);
-//				e.commit();
-//
-//				// prepare Alarm Service to trigger Widget
-//				Intent intent = new Intent(MyAppWidgetProvider.MY_WIDGET_UPDATE);
-//				PendingIntent pendingIntent = PendingIntent.getBroadcast(
-//						mainActivity.this, 0, intent, 0);
-//
-//				AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-//
-//				// Calendar mycalendar = Calendar.getInstance();
-//				// mycalendar.setTimeInMillis(System.currentTimeMillis());
-//				// mycalendar.add(Calendar.SECOND, 10);
-//				// alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-//				// mycalendar.getTimeInMillis(), 20 * 1000, pendingIntent);
-//
-//				alarmManager.set(AlarmManager.RTC_WAKEUP,
-//						System.currentTimeMillis() + 1000, pendingIntent);
-//
-//				MyAppWidgetProvider.SaveAlarmManager(alarmManager,
-//						pendingIntent);
-//
-//				city.setText(cityS);
-//
-//				// AZ ELÕREJELZÉS BEÁLLÍTÁSA KEPEK ES ADATOK
-//
-//				day1.setImageDrawable(setImage(condition_day1S));
-//				day2.setImageDrawable(setImage(condition_day2S));
-//				day3.setImageDrawable(setImage(condition_day3S));
-//				day4.setImageDrawable(setImage(condition_day4S));
-//
-//				day1name.setText(name_day1N);
-//				day2name.setText(name_day2N);
-//				day3name.setText(name_day3N);
-//				day4name.setText(name_day4N);
-//
-//				day1high.setText("High: " + high_day1c + "°C");
-//				day2high.setText("High: " + high_day2c + "°C");
-//				day3high.setText("High: " + high_day3c + "°C");
-//				day4high.setText("High: " + high_day4c + "°C");
-//
-//				day1low.setText("Low: " + low_day1c + "°C");
-//				day2low.setText("Low: " + low_day2c + "°C");
-//				day3low.setText("Low: " + low_day3c + "°C");
-//				day4low.setText("Low: " + low_day4c + "°C");
-//
-//				day1cond.setText(condition_day1S);
-//				day2cond.setText(condition_day2S);
-//				day3cond.setText(condition_day3S);
-//				day4cond.setText(condition_day4S);
-//
-//				// AZ IDOJARASI ADATOK BEALLITASA
-//
-//				temp.setText(tempS);
-//				humi.setText(humiS);
-//				desc.setText(descS);
-//				wind.setText(windS);
-//
-//				// KEP ES HATTER BEALLITASA
-//
-//				icontoday.setImageDrawable(setImage(descS));
-//				mainlayout.setBackgroundDrawable(setBg(descS));
-//			}
-//		});
-//	}
-	
+	// public void setData() {
+	// logToLogCat("mainActivity", "setData");
+	// runOnUiThread(new Runnable() {
+	// public void run() {
+	// Editor e = sp.edit();
+	// e.putString("weather", descS + DELIMITER + tempS + DELIMITER
+	// + high_day1c + DELIMITER + low_day1c);
+	// e.putString("location", cityS);
+	// e.commit();
+	//
+	// // prepare Alarm Service to trigger Widget
+	// Intent intent = new Intent(MyAppWidgetProvider.MY_WIDGET_UPDATE);
+	// PendingIntent pendingIntent = PendingIntent.getBroadcast(
+	// mainActivity.this, 0, intent, 0);
+	//
+	// AlarmManager alarmManager = (AlarmManager)
+	// getSystemService(ALARM_SERVICE);
+	//
+	// // Calendar mycalendar = Calendar.getInstance();
+	// // mycalendar.setTimeInMillis(System.currentTimeMillis());
+	// // mycalendar.add(Calendar.SECOND, 10);
+	// // alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+	// // mycalendar.getTimeInMillis(), 20 * 1000, pendingIntent);
+	//
+	// alarmManager.set(AlarmManager.RTC_WAKEUP,
+	// System.currentTimeMillis() + 1000, pendingIntent);
+	//
+	// MyAppWidgetProvider.SaveAlarmManager(alarmManager,
+	// pendingIntent);
+	//
+	// city.setText(cityS);
+	//
+	// // AZ ELÕREJELZÉS BEÁLLÍTÁSA KEPEK ES ADATOK
+	//
+	// day1.setImageDrawable(setImage(condition_day1S));
+	// day2.setImageDrawable(setImage(condition_day2S));
+	// day3.setImageDrawable(setImage(condition_day3S));
+	// day4.setImageDrawable(setImage(condition_day4S));
+	//
+	// day1name.setText(name_day1N);
+	// day2name.setText(name_day2N);
+	// day3name.setText(name_day3N);
+	// day4name.setText(name_day4N);
+	//
+	// day1high.setText("High: " + high_day1c + "°C");
+	// day2high.setText("High: " + high_day2c + "°C");
+	// day3high.setText("High: " + high_day3c + "°C");
+	// day4high.setText("High: " + high_day4c + "°C");
+	//
+	// day1low.setText("Low: " + low_day1c + "°C");
+	// day2low.setText("Low: " + low_day2c + "°C");
+	// day3low.setText("Low: " + low_day3c + "°C");
+	// day4low.setText("Low: " + low_day4c + "°C");
+	//
+	// day1cond.setText(condition_day1S);
+	// day2cond.setText(condition_day2S);
+	// day3cond.setText(condition_day3S);
+	// day4cond.setText(condition_day4S);
+	//
+	// // AZ IDOJARASI ADATOK BEALLITASA
+	//
+	// temp.setText(tempS);
+	// humi.setText(humiS);
+	// desc.setText(descS);
+	// wind.setText(windS);
+	//
+	// // KEP ES HATTER BEALLITASA
+	//
+	// icontoday.setImageDrawable(setImage(descS));
+	// mainlayout.setBackgroundDrawable(setBg(descS));
+	// }
+	// });
+	// }
+
 	public void setData() {
 		runOnUiThread(new Runnable() {
 			public void run() {
@@ -1132,124 +1127,124 @@ public class mainActivity extends Activity implements LocationListener {
 
 	// A MEGFELELÕ KÉPET BEÁLLÍTÓ FÜGGVÉNY A KÉPPEL TÉR VISSZA
 
-//	public Drawable setImage(String condition) {
-//
-//		logToLogCat("mainActivity", "setImage");
-//		Resources res = getResources();
-//		Drawable drawable;
-//
-//		if (condition.equals("Fog")) {
-//			drawable = res.getDrawable(R.drawable.fog);
-//			return drawable;
-//		}
-//		if (condition.equals("Overcast")) {
-//			drawable = res.getDrawable(R.drawable.overcast);
-//			return drawable;
-//		}
-//		if (condition.equals("Partly Sunny")) {
-//			drawable = res.getDrawable(R.drawable.partlysunny);
-//			return drawable;
-//		}
-//		if (condition.equals("Freezing Drizzle")) {
-//			drawable = res.getDrawable(R.drawable.freezingdrizzle);
-//			return drawable;
-//		}
-//		if (condition.equals("Drizzle")) {
-//			drawable = res.getDrawable(R.drawable.freezingdrizzle);
-//			return drawable;
-//		}
-//		if (condition.equals("Clear")) {
-//			drawable = res.getDrawable(R.drawable.clear);
-//			return drawable;
-//		}
-//		if (condition.equals("Cloudy")) {
-//			drawable = res.getDrawable(R.drawable.cloudy);
-//			return drawable;
-//		}
-//		if (condition.equals("Haze")) {
-//			drawable = res.getDrawable(R.drawable.haze);
-//			return drawable;
-//		}
-//		if (condition.equals("Light rain")) {
-//			drawable = res.getDrawable(R.drawable.lightrain);
-//			return drawable;
-//		}
-//		if (condition.equals("Mostly Cloudy")) {
-//			drawable = res.getDrawable(R.drawable.mostlycloudy);
-//			return drawable;
-//		}
-//		if (condition.equals("Partly Cloudy")) {
-//			drawable = res.getDrawable(R.drawable.partlycloudy);
-//			return drawable;
-//		}
-//		if (condition.equals("Rain")) {
-//			drawable = res.getDrawable(R.drawable.rain);
-//			return drawable;
-//		}
-//		if (condition.equals("Rain Showers")) {
-//			drawable = res.getDrawable(R.drawable.rainshowers);
-//			return drawable;
-//		}
-//		if (condition.equals("Showers")) {
-//			drawable = res.getDrawable(R.drawable.rainshowers);
-//			return drawable;
-//		}
-//		if (condition.equals("Thunderstorm")) {
-//			drawable = res.getDrawable(R.drawable.storm);
-//			return drawable;
-//		}
-//		if (condition.equals("Chance of Rain")) {
-//			drawable = res.getDrawable(R.drawable.chanceofrain);
-//			return drawable;
-//		}
-//		if (condition.equals("Chance of Showers")) {
-//			drawable = res.getDrawable(R.drawable.chanceofrain);
-//			return drawable;
-//		}
-//		if (condition.equals("Chance of Snow")) {
-//			drawable = res.getDrawable(R.drawable.chanceofsnow);
-//			return drawable;
-//		}
-//		if (condition.equals("Chance of Storm")) {
-//			drawable = res.getDrawable(R.drawable.chanceofstorm);
-//			return drawable;
-//		}
-//		if (condition.equals("Mostly Sunny")) {
-//			drawable = res.getDrawable(R.drawable.mostlysunny);
-//			return drawable;
-//		}
-//		if (condition.equals("Scattered Showers")) {
-//			drawable = res.getDrawable(R.drawable.scatteredshowers);
-//			return drawable;
-//		}
-//		if (condition.equals("Sunny")) {
-//			drawable = res.getDrawable(R.drawable.sunny);
-//			return drawable;
-//		}
-//		if (condition.equals("Snow")) {
-//			drawable = res.getDrawable(R.drawable.snow);
-//			return drawable;
-//		}
-//		if (condition.equals("Light snow")) {
-//			drawable = res.getDrawable(R.drawable.snow);
-//			return drawable;
-//		}
-//		if (condition.equals("Snow showers")) {
-//			drawable = res.getDrawable(R.drawable.snowshowers);
-//			return drawable;
-//		}
-//		if (condition.equals("Smoke")) {
-//			drawable = res.getDrawable(R.drawable.smoke);
-//			return drawable;
-//		}
-//		if (condition.equals("Rain and Snow")) {
-//			drawable = res.getDrawable(R.drawable.rainandsnow);
-//			return drawable;
-//		}
-//
-//		return res.getDrawable(R.drawable.na);
-//	}
-	
+	// public Drawable setImage(String condition) {
+	//
+	// logToLogCat("mainActivity", "setImage");
+	// Resources res = getResources();
+	// Drawable drawable;
+	//
+	// if (condition.equals("Fog")) {
+	// drawable = res.getDrawable(R.drawable.fog);
+	// return drawable;
+	// }
+	// if (condition.equals("Overcast")) {
+	// drawable = res.getDrawable(R.drawable.overcast);
+	// return drawable;
+	// }
+	// if (condition.equals("Partly Sunny")) {
+	// drawable = res.getDrawable(R.drawable.partlysunny);
+	// return drawable;
+	// }
+	// if (condition.equals("Freezing Drizzle")) {
+	// drawable = res.getDrawable(R.drawable.freezingdrizzle);
+	// return drawable;
+	// }
+	// if (condition.equals("Drizzle")) {
+	// drawable = res.getDrawable(R.drawable.freezingdrizzle);
+	// return drawable;
+	// }
+	// if (condition.equals("Clear")) {
+	// drawable = res.getDrawable(R.drawable.clear);
+	// return drawable;
+	// }
+	// if (condition.equals("Cloudy")) {
+	// drawable = res.getDrawable(R.drawable.cloudy);
+	// return drawable;
+	// }
+	// if (condition.equals("Haze")) {
+	// drawable = res.getDrawable(R.drawable.haze);
+	// return drawable;
+	// }
+	// if (condition.equals("Light rain")) {
+	// drawable = res.getDrawable(R.drawable.lightrain);
+	// return drawable;
+	// }
+	// if (condition.equals("Mostly Cloudy")) {
+	// drawable = res.getDrawable(R.drawable.mostlycloudy);
+	// return drawable;
+	// }
+	// if (condition.equals("Partly Cloudy")) {
+	// drawable = res.getDrawable(R.drawable.partlycloudy);
+	// return drawable;
+	// }
+	// if (condition.equals("Rain")) {
+	// drawable = res.getDrawable(R.drawable.rain);
+	// return drawable;
+	// }
+	// if (condition.equals("Rain Showers")) {
+	// drawable = res.getDrawable(R.drawable.rainshowers);
+	// return drawable;
+	// }
+	// if (condition.equals("Showers")) {
+	// drawable = res.getDrawable(R.drawable.rainshowers);
+	// return drawable;
+	// }
+	// if (condition.equals("Thunderstorm")) {
+	// drawable = res.getDrawable(R.drawable.storm);
+	// return drawable;
+	// }
+	// if (condition.equals("Chance of Rain")) {
+	// drawable = res.getDrawable(R.drawable.chanceofrain);
+	// return drawable;
+	// }
+	// if (condition.equals("Chance of Showers")) {
+	// drawable = res.getDrawable(R.drawable.chanceofrain);
+	// return drawable;
+	// }
+	// if (condition.equals("Chance of Snow")) {
+	// drawable = res.getDrawable(R.drawable.chanceofsnow);
+	// return drawable;
+	// }
+	// if (condition.equals("Chance of Storm")) {
+	// drawable = res.getDrawable(R.drawable.chanceofstorm);
+	// return drawable;
+	// }
+	// if (condition.equals("Mostly Sunny")) {
+	// drawable = res.getDrawable(R.drawable.mostlysunny);
+	// return drawable;
+	// }
+	// if (condition.equals("Scattered Showers")) {
+	// drawable = res.getDrawable(R.drawable.scatteredshowers);
+	// return drawable;
+	// }
+	// if (condition.equals("Sunny")) {
+	// drawable = res.getDrawable(R.drawable.sunny);
+	// return drawable;
+	// }
+	// if (condition.equals("Snow")) {
+	// drawable = res.getDrawable(R.drawable.snow);
+	// return drawable;
+	// }
+	// if (condition.equals("Light snow")) {
+	// drawable = res.getDrawable(R.drawable.snow);
+	// return drawable;
+	// }
+	// if (condition.equals("Snow showers")) {
+	// drawable = res.getDrawable(R.drawable.snowshowers);
+	// return drawable;
+	// }
+	// if (condition.equals("Smoke")) {
+	// drawable = res.getDrawable(R.drawable.smoke);
+	// return drawable;
+	// }
+	// if (condition.equals("Rain and Snow")) {
+	// drawable = res.getDrawable(R.drawable.rainandsnow);
+	// return drawable;
+	// }
+	//
+	// return res.getDrawable(R.drawable.na);
+	// }
+
 	public Drawable setImage(String condition) {
 
 		Resources res = getResources();
@@ -1389,124 +1384,124 @@ public class mainActivity extends Activity implements LocationListener {
 
 	// A MEGFELELÕ HÁTTERET BEÁLLÍTÓ FÜGGVÉNY KÉPPEL TÉR VISSZA
 
-//	public Drawable setBg(String condition) {
-//
-//		logToLogCat("mainActivity", "setBg");
-//		Resources res = getResources();
-//		Drawable drawable;
-//
-//		if (condition.equals("Fog")) {
-//			drawable = res.getDrawable(R.drawable.bgsnow);
-//			return drawable;
-//		}
-//		if (condition.equals("Overcast")) {
-//			drawable = res.getDrawable(R.drawable.bgcloud);
-//			return drawable;
-//		}
-//		if (condition.equals("Partly Sunny")) {
-//			drawable = res.getDrawable(R.drawable.bgsun);
-//			return drawable;
-//		}
-//		if (condition.equals("Freezing Drizzle")) {
-//			drawable = res.getDrawable(R.drawable.bgrain);
-//			return drawable;
-//		}
-//		if (condition.equals("Drizzle")) {
-//			drawable = res.getDrawable(R.drawable.bgrain);
-//			return drawable;
-//		}
-//		if (condition.equals("Clear")) {
-//			drawable = res.getDrawable(R.drawable.bgsun);
-//			return drawable;
-//		}
-//		if (condition.equals("Cloudy")) {
-//			drawable = res.getDrawable(R.drawable.bgcloud);
-//			return drawable;
-//		}
-//		if (condition.equals("Haze")) {
-//			drawable = res.getDrawable(R.drawable.bgsnow);
-//			return drawable;
-//		}
-//		if (condition.equals("Light rain")) {
-//			drawable = res.getDrawable(R.drawable.bgrain);
-//			return drawable;
-//		}
-//		if (condition.equals("Mostly Cloudy")) {
-//			drawable = res.getDrawable(R.drawable.bgcloud);
-//			return drawable;
-//		}
-//		if (condition.equals("Partly Cloudy")) {
-//			drawable = res.getDrawable(R.drawable.bgcloud);
-//			return drawable;
-//		}
-//		if (condition.equals("Rain")) {
-//			drawable = res.getDrawable(R.drawable.bgrain);
-//			return drawable;
-//		}
-//		if (condition.equals("Rain Showers")) {
-//			drawable = res.getDrawable(R.drawable.bgrain);
-//			return drawable;
-//		}
-//		if (condition.equals("Showers")) {
-//			drawable = res.getDrawable(R.drawable.bgrain);
-//			return drawable;
-//		}
-//		if (condition.equals("Thunderstorm")) {
-//			drawable = res.getDrawable(R.drawable.bgstorm);
-//			return drawable;
-//		}
-//		if (condition.equals("Chance of Rain")) {
-//			drawable = res.getDrawable(R.drawable.bgrain);
-//			return drawable;
-//		}
-//		if (condition.equals("Chance of Showers")) {
-//			drawable = res.getDrawable(R.drawable.bgrain);
-//			return drawable;
-//		}
-//		if (condition.equals("Chance of Snow")) {
-//			drawable = res.getDrawable(R.drawable.bgsnow);
-//			return drawable;
-//		}
-//		if (condition.equals("Chance of Storm")) {
-//			drawable = res.getDrawable(R.drawable.bgstorm);
-//			return drawable;
-//		}
-//		if (condition.equals("Mostly Sunny")) {
-//			drawable = res.getDrawable(R.drawable.bgsun);
-//			return drawable;
-//		}
-//		if (condition.equals("Scattered Showers")) {
-//			drawable = res.getDrawable(R.drawable.bgrain);
-//			return drawable;
-//		}
-//		if (condition.equals("Sunny")) {
-//			drawable = res.getDrawable(R.drawable.bgsun);
-//			return drawable;
-//		}
-//		if (condition.equals("Snow")) {
-//			drawable = res.getDrawable(R.drawable.bgsnow);
-//			return drawable;
-//		}
-//		if (condition.equals("Light snow")) {
-//			drawable = res.getDrawable(R.drawable.bgsnow);
-//			return drawable;
-//		}
-//		if (condition.equals("Snow showers")) {
-//			drawable = res.getDrawable(R.drawable.bgsnow);
-//			return drawable;
-//		}
-//		if (condition.equals("Smoke")) {
-//			drawable = res.getDrawable(R.drawable.bgsnow);
-//			return drawable;
-//		}
-//		if (condition.equals("Rain and Snow")) {
-//			drawable = res.getDrawable(R.drawable.bgsnow);
-//			return drawable;
-//		}
-//
-//		return res.getDrawable(R.drawable.bg);
-//	}
-	
+	// public Drawable setBg(String condition) {
+	//
+	// logToLogCat("mainActivity", "setBg");
+	// Resources res = getResources();
+	// Drawable drawable;
+	//
+	// if (condition.equals("Fog")) {
+	// drawable = res.getDrawable(R.drawable.bgsnow);
+	// return drawable;
+	// }
+	// if (condition.equals("Overcast")) {
+	// drawable = res.getDrawable(R.drawable.bgcloud);
+	// return drawable;
+	// }
+	// if (condition.equals("Partly Sunny")) {
+	// drawable = res.getDrawable(R.drawable.bgsun);
+	// return drawable;
+	// }
+	// if (condition.equals("Freezing Drizzle")) {
+	// drawable = res.getDrawable(R.drawable.bgrain);
+	// return drawable;
+	// }
+	// if (condition.equals("Drizzle")) {
+	// drawable = res.getDrawable(R.drawable.bgrain);
+	// return drawable;
+	// }
+	// if (condition.equals("Clear")) {
+	// drawable = res.getDrawable(R.drawable.bgsun);
+	// return drawable;
+	// }
+	// if (condition.equals("Cloudy")) {
+	// drawable = res.getDrawable(R.drawable.bgcloud);
+	// return drawable;
+	// }
+	// if (condition.equals("Haze")) {
+	// drawable = res.getDrawable(R.drawable.bgsnow);
+	// return drawable;
+	// }
+	// if (condition.equals("Light rain")) {
+	// drawable = res.getDrawable(R.drawable.bgrain);
+	// return drawable;
+	// }
+	// if (condition.equals("Mostly Cloudy")) {
+	// drawable = res.getDrawable(R.drawable.bgcloud);
+	// return drawable;
+	// }
+	// if (condition.equals("Partly Cloudy")) {
+	// drawable = res.getDrawable(R.drawable.bgcloud);
+	// return drawable;
+	// }
+	// if (condition.equals("Rain")) {
+	// drawable = res.getDrawable(R.drawable.bgrain);
+	// return drawable;
+	// }
+	// if (condition.equals("Rain Showers")) {
+	// drawable = res.getDrawable(R.drawable.bgrain);
+	// return drawable;
+	// }
+	// if (condition.equals("Showers")) {
+	// drawable = res.getDrawable(R.drawable.bgrain);
+	// return drawable;
+	// }
+	// if (condition.equals("Thunderstorm")) {
+	// drawable = res.getDrawable(R.drawable.bgstorm);
+	// return drawable;
+	// }
+	// if (condition.equals("Chance of Rain")) {
+	// drawable = res.getDrawable(R.drawable.bgrain);
+	// return drawable;
+	// }
+	// if (condition.equals("Chance of Showers")) {
+	// drawable = res.getDrawable(R.drawable.bgrain);
+	// return drawable;
+	// }
+	// if (condition.equals("Chance of Snow")) {
+	// drawable = res.getDrawable(R.drawable.bgsnow);
+	// return drawable;
+	// }
+	// if (condition.equals("Chance of Storm")) {
+	// drawable = res.getDrawable(R.drawable.bgstorm);
+	// return drawable;
+	// }
+	// if (condition.equals("Mostly Sunny")) {
+	// drawable = res.getDrawable(R.drawable.bgsun);
+	// return drawable;
+	// }
+	// if (condition.equals("Scattered Showers")) {
+	// drawable = res.getDrawable(R.drawable.bgrain);
+	// return drawable;
+	// }
+	// if (condition.equals("Sunny")) {
+	// drawable = res.getDrawable(R.drawable.bgsun);
+	// return drawable;
+	// }
+	// if (condition.equals("Snow")) {
+	// drawable = res.getDrawable(R.drawable.bgsnow);
+	// return drawable;
+	// }
+	// if (condition.equals("Light snow")) {
+	// drawable = res.getDrawable(R.drawable.bgsnow);
+	// return drawable;
+	// }
+	// if (condition.equals("Snow showers")) {
+	// drawable = res.getDrawable(R.drawable.bgsnow);
+	// return drawable;
+	// }
+	// if (condition.equals("Smoke")) {
+	// drawable = res.getDrawable(R.drawable.bgsnow);
+	// return drawable;
+	// }
+	// if (condition.equals("Rain and Snow")) {
+	// drawable = res.getDrawable(R.drawable.bgsnow);
+	// return drawable;
+	// }
+	//
+	// return res.getDrawable(R.drawable.bg);
+	// }
+
 	public Drawable setBg(String condition) {
 
 		Resources res = getResources();
@@ -1684,12 +1679,12 @@ public class mainActivity extends Activity implements LocationListener {
 		}
 
 	}
-	
+
 	class LocInfo {
-		
+
 		String city;
 		String AdminArea;
-		
+
 	}
 
 	class WeatherUpdater implements Runnable {
@@ -1697,9 +1692,9 @@ public class mainActivity extends Activity implements LocationListener {
 		public void run() {
 			logToLogCat("mainActivity", "WeatherUpdate");
 			try {
-				
+
 				LocInfo locInfo = getCity(streetAddress);
-				getWeather(locInfo.city,locInfo.AdminArea);
+				getWeather(locInfo.city, locInfo.AdminArea);
 				setData();
 				handler.sendEmptyMessage(0);
 				Thread.currentThread().interrupt();
