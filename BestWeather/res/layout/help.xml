@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Thank you for using this application at this section you can get some tips how to use it.
+            This application displays the actual weather of your location. So let me show you the main functions" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/menu" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="You can see the main screen above with the menu." />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:padding="2dp"
+            android:text="Refres: refreshin the weather for the actual location" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:padding="2dp"
+            android:text="My Loc: you can simply type in your address to get the weather for your position" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:padding="2dp"
+            android:text="Loc by GPS: you need to enable your phone&apos;s GPS first then it will use your GPS to get your location and weather by it." />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:padding="2dp"
+            android:text="Loc by NET: you need to enable use wireless location in the options after that it will get your location by NETWORK and refresh your weather. " />
+    
+    	<TextView 
+    	    android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:padding="2dp"
+            android:text="That's all you need to know :) have fun!" />
+    	
+    	<TextView 
+    	    android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="2dp"
+            android:text="Credits goes for VClouds Weather ICON set thank you for your work" />
+    	
+    	<Button 
+    	    android:layout_width="fill_parent"
+    	    android:id="@+id/btn"
+    	    android:layout_height="wrap_content"
+    	    android:text="Vclouds"
+    	    />
+    	
+    </LinearLayout>
+
+</ScrollView>

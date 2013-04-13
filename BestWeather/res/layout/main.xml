@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/background"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/City"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text="Touch here to choose city or hit menu"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp" />
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <!-- első sora a táblázatnak -->
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="2dip" >
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:gravity="center"
+                    android:text="N/A TIME"
+                    android:textColor="#FFFFFF"
+                    android:textSize="50dp" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:padding="2dp"
+                        android:text="MMM DD, YYYY"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/date"
+                        android:padding="2dp"
+                        android:text="DDD"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20dp" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"    
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/degree"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_column="1"
+                        android:paddingTop="30dp"
+                        android:text="N/A"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/feellike"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_column="1"
+                        android:text="N/A"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/wind"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_column="1"
+                        android:text="N/A"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="2dip" >
+
+                <ImageView
+                    android:id="@+id/icontoday"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_column="2"
+                    android:layout_gravity="center"
+                    android:src="@drawable/na" />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:gravity="center"
+                    android:text="no description at all"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30dp" />
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <!-- első sora a táblázatnak -->
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingTop="2dip" >
+
+                <ImageView
+                    android:id="@+id/day1"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_column="1"
+                    android:gravity="center"
+                    android:src="@drawable/na" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingTop="2dip" >
+
+                <ImageView
+                    android:id="@+id/day2"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_column="2"
+                    android:gravity="center"
+                    android:src="@drawable/na" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingTop="2dip" >
+
+                <ImageView
+                    android:id="@+id/day3"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_column="3"
+                    android:gravity="center"
+                    android:src="@drawable/na" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingTop="2dip" >
+
+                <ImageView
+                    android:id="@+id/day4"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_column="4"
+                    android:gravity="center"
+                    android:src="@drawable/na" />
+            </LinearLayout>
+        </TableRow>
+
+        <!-- a tablazat masodik sora -->
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingTop="2dip" >
+
+                <TextView
+                    android:id="@+id/day1name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_column="1"
+                    android:gravity="center"
+                    android:text="DAY1"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingTop="2dip" >
+
+                <TextView
+                    android:id="@+id/day2name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_column="2"
+                    android:gravity="center"
+                    android:text="DAY2"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingTop="2dip" >
+
+                <TextView
+                    android:id="@+id/day3name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_column="3"
+                    android:gravity="center"
+                    android:text="DAY3"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingTop="2dip" >
+
+                <TextView
+                    android:id="@+id/day4name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_column="4"
+                    android:gravity="center"
+                    android:text="DAY4"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp" />
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/separator" />
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <!-- első sora a tablazatnak -->
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="2dip" >
+
+                <TextView
+                    android:id="@+id/day1hi"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_column="1"
+                    android:gravity="center"
+                    android:text="N/A"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="2dip" >
+
+                <TextView
+                    android:id="@+id/day2hi"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_column="2"
+                    android:gravity="center"
+                    android:text="N/A"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="2dip" >
+
+                <TextView
+                    android:id="@+id/day3hi"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_column="3"
+                    android:gravity="center"
+                    android:text="N/A"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="2dip" >
+
+                <TextView
+                    android:id="@+id/day4hi"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_column="4"
+                    android:gravity="center"
+                    android:text="N/A"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp" />
+            </LinearLayout>
+        </TableRow>
+
+        <!-- masodik sora a tablazatnak -->
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="2dip" >
+
+                <TextView
+                    android:id="@+id/day1lo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_column="1"
+                    android:gravity="center"
+                    android:text="N/A"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="2dip" >
+
+                <TextView
+                    android:id="@+id/day2lo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_column="2"
+                    android:gravity="center"
+                    android:text="N/A"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="2dip" >
+
+                <TextView
+                    android:id="@+id/day3lo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_column="3"
+                    android:gravity="center"
+                    android:text="N/A"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="2dip" >
+
+                <TextView
+                    android:id="@+id/day4lo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_column="4"
+                    android:gravity="center"
+                    android:text="N/A"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp" />
+            </LinearLayout>
+        </TableRow>
+
+        <!-- harmadik sora a tablazatnak -->
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="2dip" >
+
+                <TextView
+                    android:id="@+id/day1wind"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_column="1"
+                    android:gravity="center"
+                    android:text="N/A"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="2dip" >
+
+                <TextView
+                    android:id="@+id/day2wind"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_column="2"
+                    android:gravity="center"
+                    android:text="N/A"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="2dip" >
+
+                <TextView
+                    android:id="@+id/day3wind"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_column="3"
+                    android:gravity="center"
+                    android:text="N/A"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="2dip" >
+
+                <TextView
+                    android:id="@+id/day4wind"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_column="4"
+                    android:gravity="center"
+                    android:text="N/A"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15dp" />
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="25dp"
+        android:layout_gravity="right"
+        android:src="@drawable/wundergroundlogo" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </TableLayout>
+
+</LinearLayout>
