@@ -195,8 +195,8 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
 
 			views.setOnClickPendingIntent(R.id.pos, pendingIntent);
 			views.setTextViewText(R.id.pos, City);
-			views.setTextViewText(R.id.whi, "Hi: " + splitWeather[2]);
-			views.setTextViewText(R.id.wlo, "Lo: " + splitWeather[3]);
+			views.setTextViewText(R.id.whi, splitWeather[2]);
+			views.setTextViewText(R.id.wlo, splitWeather[3]);
 			views.setOnClickPendingIntent(R.id.wicon, pendingIntent);
 
 			Log.i("BestWeather", "Widget Update");

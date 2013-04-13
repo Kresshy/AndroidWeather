@@ -234,7 +234,7 @@ public class mainActivity extends Activity implements LocationListener {
 		String loadedcity = sp.getString("location", DEFAULT_CITY);
 		streetAddress = loadedcity;
 
-		if (chkStatus()) {
+		if (chkStatusNoNotify()) {
 			dialog = ProgressDialog.show(this, "", "Updating weather...", true,
 					true);
 			Runnable runn = new WeatherUpdater();
