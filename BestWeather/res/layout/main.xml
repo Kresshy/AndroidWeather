@@ -71,7 +71,7 @@
 
                 <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"    
+                    android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:orientation="vertical" >
 
@@ -79,8 +79,8 @@
                         android:id="@+id/degree"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_column="1"
+                        android:gravity="center"
                         android:paddingTop="30dp"
                         android:text="N/A"
                         android:textColor="#FFFFFF"
@@ -90,8 +90,8 @@
                         android:id="@+id/feellike"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_column="1"
+                        android:gravity="center"
                         android:text="N/A"
                         android:textColor="#FFFFFF"
                         android:textSize="20dp" />
@@ -100,8 +100,8 @@
                         android:id="@+id/wind"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_column="1"
+                        android:gravity="center"
                         android:text="N/A"
                         android:textColor="#FFFFFF"
                         android:textSize="20dp" />
