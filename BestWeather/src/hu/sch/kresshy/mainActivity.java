@@ -873,13 +873,32 @@ public class mainActivity extends Activity implements LocationListener {
 	public void getWeather(String City, String Country)
 			throws ParserConfigurationException, SAXException, IOException,
 			URISyntaxException {
-
+		
+		City = City.replaceAll("á", "a");
+		City = City.replaceAll("é", "e");
+		City = City.replaceAll("ó", "o");
+		City = City.replaceAll("õ", "o");
+		City = City.replaceAll("ö", "o");
+		City = City.replaceAll("ú", "U");
+		City = City.replaceAll("û", "U");
+		City = City.replaceAll("ü", "U");
+		City = City.replaceAll("í", "i");
+		City = City.replaceAll("Á", "A");
+		City = City.replaceAll("É", "E");
+		City = City.replaceAll("Ó", "O");
+		City = City.replaceAll("Õ", "O");
+		City = City.replaceAll("Ö", "O");
+		City = City.replaceAll("Ú", "U");
+		City = City.replaceAll("Û", "U");
+		City = City.replaceAll("Ü", "U");
+		City = City.replaceAll("Í", "I");
+		
 		URI uri = new URI("http",
 				"//api.wunderground.com/api/1581002a1df007d6/conditions/forecast/astronomy/q/"
 						+ Country + "/" + City + ".xml", null);
-//		String request = uri.toASCIIString();
 		
-		String request = uri.toString();
+		String request = uri.toASCIIString();
+		
 		logToLogCat("mainActivity", "request: " + request);
 
 		URL url = new URL(request);
