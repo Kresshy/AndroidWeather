@@ -129,9 +129,11 @@
                     android:layout_height="wrap_content"
                     android:layout_column="2"
                     android:gravity="center"
+                    android:paddingLeft="30dp"
                     android:text="no description at all"
                     android:textColor="#FFFFFF"
                     android:textSize="30dp" />
+
             </LinearLayout>
         </TableRow>
     </TableLayout>
