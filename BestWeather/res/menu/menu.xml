@@ -10,16 +10,17 @@
         android:id="@+id/location"
         android:title="My Loc"
         android:icon="@android:drawable/ic_menu_edit"/>
-<!-- 
-    <item
-        android:id="@+id/GPSlocation"
-        android:title="Loc by GPS"
-        android:icon="@android:drawable/ic_menu_mylocation"/>
 
     <item
         android:id="@+id/Networklocation"
         android:title="Loc by NET"
         android:icon="@android:drawable/ic_menu_share"/>
+    
+<!-- 
+    <item
+        android:id="@+id/GPSlocation"
+        android:title="Loc by GPS"
+        android:icon="@android:drawable/ic_menu_mylocation"/>
 
     <item
         android:id="@+id/help"
