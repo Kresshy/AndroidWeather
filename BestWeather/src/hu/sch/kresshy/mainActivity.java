@@ -247,12 +247,12 @@ public class mainActivity extends Activity implements LocationListener {
 			Runnable runnn = new IPLocUpdater();
 			getLocByIPthread = new Thread(runnn);
 			getLocByIPthread.start();
-		}
 
-		try {
-			getLocByIPthread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			try {
+				getLocByIPthread.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 
 		sp = getSharedPreferences(getPackageName(), MODE_PRIVATE);
@@ -332,20 +332,21 @@ public class mainActivity extends Activity implements LocationListener {
 		final ConnectivityManager connMgr = (ConnectivityManager) this
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-		final android.net.NetworkInfo wifi = connMgr
-				.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+		final android.net.NetworkInfo netWorkInfo = connMgr
+				.getActiveNetworkInfo();
 
-		final android.net.NetworkInfo mobile = connMgr
-				.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+		// final android.net.NetworkInfo mobile = connMgr
+		// .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
-		if (wifi.isConnected()) {
+		if (netWorkInfo.isConnected()) {
 			Toast.makeText(this, "Connected via Wifi", Toast.LENGTH_LONG)
 					.show();
 			return true;
-		} else if (mobile.isConnected()) {
-			Toast.makeText(this, "Connected via Mobile 3G ", Toast.LENGTH_LONG)
-					.show();
-			return true;
+			// } else if (mobile.isConnected()) {
+			// Toast.makeText(this, "Connected via Mobile 3G ",
+			// Toast.LENGTH_LONG)
+			// .show();
+			// return true;
 		} else {
 
 			AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
@@ -402,16 +403,53 @@ public class mainActivity extends Activity implements LocationListener {
 		final ConnectivityManager connMgr = (ConnectivityManager) this
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-		final android.net.NetworkInfo wifi = connMgr
-				.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+		final android.net.NetworkInfo netWorkInfo = connMgr
+				.getActiveNetworkInfo();
 
-		final android.net.NetworkInfo mobile = connMgr
-				.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+		// final android.net.NetworkInfo mobile = connMgr
+		// .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+		if (netWorkInfo != null) {
+			if (netWorkInfo.isConnected()) {
+				return true;
+			} else {
+				AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
+				alt_bld.setMessage("Choose to switch on!")
+						.setCancelable(true)
+						.setPositiveButton("Enable Wifi",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										startActivityForResult(
+												new Intent(
+														android.provider.Settings.ACTION_WIFI_SETTINGS),
+												0);
+									}
+								})
+						.setNegativeButton("Enable 3G",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										Intent intent = new Intent(
+												Settings.ACTION_DATA_ROAMING_SETTINGS);
+										ComponentName cName = new ComponentName(
+												"com.android.phone",
+												"com.android.phone.Settings");
+										intent.setComponent(cName);
+										startActivityForResult(intent, 0);
 
-		if (wifi.isConnected()) {
-			return true;
-		} else if (mobile.isConnected()) {
-			return true;
+									}
+								});
+				AlertDialog alert = alt_bld.create();
+				// Title for AlertDialog
+				alert.setTitle("No Network");
+				// Icon for AlertDialog
+				alert.setIcon(R.drawable.ic_launcher);
+				alert.show();
+				Toast.makeText(this, "No Network Access", Toast.LENGTH_LONG)
+						.show();
+				
+				return false;
+			}
 		} else {
 			AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
 			alt_bld.setMessage("Choose to switch on!")
@@ -452,7 +490,8 @@ public class mainActivity extends Activity implements LocationListener {
 			//
 			// startActivityForResult(new
 			// Intent(android.provider.Settings.ACTION_SOUND_SETTINGS), 0);
-			// Intent intent=new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS);
+			// Intent intent=new
+			// Intent(Settings.ACTION_DATA_ROAMING_SETTINGS);
 			// ComponentName cName = new
 			// ComponentName("com.android.phone","com.android.phone.Settings");
 			// intent.setComponent(cName);
@@ -460,6 +499,7 @@ public class mainActivity extends Activity implements LocationListener {
 
 			return false;
 		}
+
 	}
 
 	// A MENU LETREHOZASA
@@ -552,11 +592,11 @@ public class mainActivity extends Activity implements LocationListener {
 			logToLogCat("mainActivity", "onOptionsItemSelected Networklocation");
 
 			if (chkStatusNoNotify()) {
-			dialog2 = ProgressDialog.show(this, "",
-					"Updating location info...", true, true);
-			Runnable runn = new LocationByNetUpdater();
-			getLocByIPthread = new Thread(runn);
-			getLocByIPthread.start();
+				dialog2 = ProgressDialog.show(this, "",
+						"Updating location info...", true, true);
+				Runnable runn = new LocationByNetUpdater();
+				getLocByIPthread = new Thread(runn);
+				getLocByIPthread.start();
 			}
 
 			try {
