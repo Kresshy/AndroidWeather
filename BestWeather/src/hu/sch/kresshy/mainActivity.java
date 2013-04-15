@@ -1,6 +1,10 @@
 package hu.sch.kresshy;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -15,6 +19,13 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -171,9 +182,10 @@ public class mainActivity extends Activity implements LocationListener {
 	String humiS;
 
 	Thread weatherThread;
-	ProgressDialog dialog;
+	Thread getLocByIPthread;
+	ProgressDialog dialog, dialog2;
 
-	private final String DEFAULT_CITY = "Budapest";
+	private String DEFAULT_CITY = "Budapest";
 
 	public static synchronized void logToLogCat(String TAG, String message) {
 		Log.i(TAG, message);
@@ -229,7 +241,17 @@ public class mainActivity extends Activity implements LocationListener {
 		day3cond = (TextView) findViewById(R.id.day3wind);
 		day4cond = (TextView) findViewById(R.id.day4wind);
 
-		Thread myThread = null;
+		dialog2 = ProgressDialog.show(this, "", "Updating location info...",
+				true, true);
+		Runnable runnn = new IPLocUpdater();
+		getLocByIPthread = new Thread(runnn);
+		getLocByIPthread.start();
+
+		try {
+			getLocByIPthread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
 		sp = getSharedPreferences(getPackageName(), MODE_PRIVATE);
 		String loadedcity = sp.getString("location", DEFAULT_CITY);
@@ -243,6 +265,7 @@ public class mainActivity extends Activity implements LocationListener {
 			weatherThread.start();
 		}
 
+		Thread myThread = null;
 		Runnable runnable = new CountDownRunner();
 		myThread = new Thread(runnable);
 		myThread.start();
@@ -523,42 +546,58 @@ public class mainActivity extends Activity implements LocationListener {
 
 			return true;
 
-			/*
-			 * case R.id.GPSlocation: logToLogCat("mainActivity",
-			 * "onOptionsItemSelected GPSlocation"); locmanager =
-			 * (LocationManager) this
-			 * .getSystemService(Context.LOCATION_SERVICE); if
-			 * (locmanager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-			 * 
-			 * locmanager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-			 * 0, 0, mainActivity.this);
-			 * 
-			 * } else { Toast.makeText(this, "Enable GPS!",
-			 * Toast.LENGTH_LONG).show(); startActivityForResult( new Intent(
-			 * android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0); }
-			 * return true;
-			 * 
-			 * case R.id.Networklocation: logToLogCat("mainActivity",
-			 * "onOptionsItemSelected Networklocation"); locmanager =
-			 * (LocationManager) this
-			 * .getSystemService(Context.LOCATION_SERVICE);
-			 * 
-			 * if
-			 * (locmanager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
-			 * { locmanager.requestLocationUpdates(
-			 * LocationManager.NETWORK_PROVIDER, 0, 0, mainActivity.this); }
-			 * else { Toast.makeText(this, "Enable Wireless Network!",
-			 * Toast.LENGTH_LONG).show(); startActivityForResult( new Intent(
-			 * android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0); }
-			 * return true;
-			 * 
-			 * case R.id.help:
-			 * 
-			 * Intent myIntent2 = new Intent(getApplicationContext(),
-			 * helpActivity.class); startActivity(myIntent2);
-			 * 
-			 * return true;
-			 */
+		case R.id.Networklocation:
+			logToLogCat("mainActivity", "onOptionsItemSelected Networklocation");
+
+			dialog2 = ProgressDialog.show(this, "",
+					"Updating location info...", true, true);
+			Runnable runn = new LocationByNetUpdater();
+			getLocByIPthread = new Thread(runn);
+			getLocByIPthread.start();
+
+			try {
+				getLocByIPthread.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			if (chkStatusNoNotify()) {
+				dialog = ProgressDialog.show(this, "", "Updating weather...",
+						true, true);
+				Runnable runnn = new WeatherUpdater();
+				weatherThread = new Thread(runnn);
+				weatherThread.start();
+			}
+
+			return true;
+
+			// case R.id.GPSlocation:
+			// logToLogCat("mainActivity", "onOptionsItemSelected GPSlocation");
+			// locmanager = (LocationManager) this
+			// .getSystemService(Context.LOCATION_SERVICE);
+			// if (locmanager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+			//
+			// locmanager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+			// 0, 0, mainActivity.this);
+			//
+			// } else {
+			// Toast.makeText(this, "Enable GPS!", Toast.LENGTH_LONG).show();
+			// startActivityForResult(
+			// new Intent(
+			// android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS),
+			// 0);
+			// }
+			// return true;
+			//
+			//
+			//
+			// case R.id.help:
+			//
+			// Intent myIntent2 = new Intent(getApplicationContext(),
+			// helpActivity.class);
+			// startActivity(myIntent2);
+			//
+			// return true;
 
 		default:
 
@@ -1002,6 +1041,73 @@ public class mainActivity extends Activity implements LocationListener {
 		low_day3S = "Low: " + lowList.get(2) + " °C";
 		low_day4S = "Low: " + lowList.get(3) + " °C";
 
+	}
+
+	public JSONObject getJSONFromUrl(String url) {
+
+		InputStream is = null;
+		JSONObject jObj = null;
+		String json = "";
+
+		// Making HTTP request
+		try {
+			// defaultHttpClient
+			DefaultHttpClient httpClient = new DefaultHttpClient();
+			HttpPost httpPost = new HttpPost(url);
+
+			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpEntity httpEntity = httpResponse.getEntity();
+			is = httpEntity.getContent();
+
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					is, "iso-8859-1"), 8);
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			is.close();
+			json = sb.toString();
+		} catch (Exception e) {
+			Log.e("Buffer Error", "Error converting result " + e.toString());
+		}
+
+		// try parse the string to a JSON object
+		try {
+			jObj = new JSONObject(json);
+		} catch (JSONException e) {
+			Log.e("JSON Parser", "Error parsing data " + e.toString());
+		}
+
+		// return JSON String
+		return jObj;
+
+	}
+
+	public String getLocationFromIP() throws JSONException, URISyntaxException,
+			ParserConfigurationException, SAXException, IOException {
+
+		// getting JSON string from URL
+		JSONObject json = getJSONFromUrl("http://api.hostip.info/get_json.php");
+		String ipfromjson = json.getString("ip");
+
+		// get location from ip
+		JSONObject geojson = getJSONFromUrl("http://freegeoip.net/json/"
+				+ ipfromjson);
+		String geofromipjson = geojson.getString("city");
+
+		logToLogCat("JSON location", geofromipjson);
+
+		return geofromipjson;
 	}
 
 	// public void setData() {
@@ -1767,11 +1873,69 @@ public class mainActivity extends Activity implements LocationListener {
 		}
 	}
 
+	class IPLocUpdater implements Runnable {
+
+		public void run() {
+			logToLogCat("mainActivity", "IPLocUpdater");
+
+			try {
+				DEFAULT_CITY = getLocationFromIP();
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			} catch (ParserConfigurationException e) {
+				e.printStackTrace();
+			} catch (SAXException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			handler2.sendEmptyMessage(0);
+			Thread.currentThread().interrupt();
+		}
+	}
+
+	class LocationByNetUpdater implements Runnable {
+
+		public void run() {
+			logToLogCat("mainActivity", "LocationByNetUpdater");
+
+			try {
+				streetAddress = getLocationFromIP();
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			} catch (ParserConfigurationException e) {
+				e.printStackTrace();
+			} catch (SAXException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			handler2.sendEmptyMessage(0);
+			Thread.currentThread().interrupt();
+		}
+	}
+
 	private Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			dialog.dismiss();
+		}
+
+	};
+
+	private Handler handler2 = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			dialog2.dismiss();
 		}
 
 	};
