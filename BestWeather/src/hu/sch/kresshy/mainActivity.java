@@ -185,7 +185,7 @@ public class mainActivity extends Activity implements LocationListener {
 	Thread getLocByIPthread;
 	ProgressDialog dialog, dialog2;
 
-	private String DEFAULT_CITY = "Budapest";
+	private String DEFAULT_CITY = "";
 
 	public static synchronized void logToLogCat(String TAG, String message) {
 		Log.i(TAG, message);
