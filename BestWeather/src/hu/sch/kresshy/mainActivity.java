@@ -640,10 +640,10 @@ public class mainActivity extends Activity implements LocationListener {
 			loc.city = myList.get(0).getLocality();
 		}
 
-		if (myList.get(0).getAdminArea() != null) {
+		if (myList.get(0).getAdminArea() != null || myList.get(0).getCountryName() != null) {
 			logToLogCat("mainActivity", myList.get(0).getCountryName() + " " + myList.get(0).getSubAdminArea() + " " + myList.get(0).getAdminArea());
 			// return myList.get(0).getAdminArea();
-			if(myList.get(0).getCountryName().equals("United States"))
+			if(myList.get(0).getCountryName().equals("United States") || myList.get(0).getCountryName() == null)
 				loc.AdminArea = myList.get(0).getAdminArea();
 			else
 				loc.AdminArea = myList.get(0).getCountryName();	
