@@ -308,22 +308,22 @@ public class mainActivity extends Activity implements LocationListener {
 
 		logToLogCat("mainActivity", "onCreate AlarmManager EarthquakeService");
 		// prepare Alarm Service to trigger Service
-		Intent intent = new Intent(getApplicationContext(),
-				EarthquakeService.class);
-		PendingIntent pendingIntent = PendingIntent.getService(
-				getApplicationContext(), 0, intent, 0);
-		AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-		Calendar mycalendar = Calendar.getInstance();
-		mycalendar.setTimeInMillis(System.currentTimeMillis());
-		mycalendar.add(Calendar.SECOND, 10);
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-				mycalendar.getTimeInMillis(), 20 * 60 * 1000, pendingIntent);
+//		Intent intent = new Intent(getApplicationContext(),
+//				EarthquakeService.class);
+//		PendingIntent pendingIntent = PendingIntent.getService(
+//				getApplicationContext(), 0, intent, 0);
+//		AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+//
+//		Calendar mycalendar = Calendar.getInstance();
+//		mycalendar.setTimeInMillis(System.currentTimeMillis());
+//		mycalendar.add(Calendar.SECOND, 10);
+//		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+//				mycalendar.getTimeInMillis(), 20 * 60 * 1000, pendingIntent);
 
 		// alarmManager.set(AlarmManager.RTC_WAKEUP,
 		// System.currentTimeMillis() + 1000, pendingIntent);
 
-		EarthquakeService.SaveAlarmManager(alarmManager, pendingIntent);
+//		EarthquakeService.SaveAlarmManager(alarmManager, pendingIntent);
 
 	}
 
@@ -425,17 +425,17 @@ public class mainActivity extends Activity implements LocationListener {
 												0);
 									}
 								})
-						.setNegativeButton("Enable 3G",
+						.setNegativeButton("Cancel",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int id) {
-										Intent intent = new Intent(
-												Settings.ACTION_DATA_ROAMING_SETTINGS);
-										ComponentName cName = new ComponentName(
-												"com.android.phone",
-												"com.android.phone.Settings");
-										intent.setComponent(cName);
-										startActivityForResult(intent, 0);
+//										Intent intent = new Intent(
+//												Settings.ACTION_DATA_ROAMING_SETTINGS);
+//										ComponentName cName = new ComponentName(
+//												"com.android.phone",
+//												"com.android.phone.Settings");
+//										intent.setComponent(cName);
+//										startActivityForResult(intent, 0);
 
 									}
 								});
@@ -447,7 +447,6 @@ public class mainActivity extends Activity implements LocationListener {
 				alert.show();
 				Toast.makeText(this, "No Network Access", Toast.LENGTH_LONG)
 						.show();
-				
 				return false;
 			}
 		} else {
@@ -464,17 +463,17 @@ public class mainActivity extends Activity implements LocationListener {
 											0);
 								}
 							})
-					.setNegativeButton("Enable 3G",
+					.setNegativeButton("Cancel",
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int id) {
-									Intent intent = new Intent(
-											Settings.ACTION_DATA_ROAMING_SETTINGS);
-									ComponentName cName = new ComponentName(
-											"com.android.phone",
-											"com.android.phone.Settings");
-									intent.setComponent(cName);
-									startActivityForResult(intent, 0);
+//									Intent intent = new Intent(
+//											Settings.ACTION_DATA_ROAMING_SETTINGS);
+//									ComponentName cName = new ComponentName(
+//											"com.android.phone",
+//											"com.android.phone.Settings");
+//									intent.setComponent(cName);
+//									startActivityForResult(intent, 0);
 
 								}
 							});
@@ -1557,6 +1556,10 @@ public class mainActivity extends Activity implements LocationListener {
 		}
 		if (condition.equals("Rain and Snow")) {
 			drawable = res.getDrawable(R.drawable.rainandsnow);
+			return drawable;
+		}
+		if(condition.equals("Heavy Rain")) {
+			drawable = res.getDrawable(R.drawable.rain);
 			return drawable;
 		}
 
