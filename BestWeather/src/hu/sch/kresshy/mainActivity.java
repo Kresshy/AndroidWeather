@@ -602,9 +602,12 @@ public class mainActivity extends Activity implements LocationListener {
 		}
 
 		if (myList.get(0).getAdminArea() != null) {
-			logToLogCat("mainActivity", myList.get(0).getCountryName());
+			logToLogCat("mainActivity", myList.get(0).getCountryName() + " " + myList.get(0).getSubAdminArea() + " " + myList.get(0).getAdminArea());
 			// return myList.get(0).getAdminArea();
-			loc.AdminArea = myList.get(0).getCountryName();
+			if(myList.get(0).getCountryName().equals("United States"))
+				loc.AdminArea = myList.get(0).getAdminArea();
+			else
+				loc.AdminArea = myList.get(0).getCountryName();	
 		}
 
 		// logToLogCat("mainActivity", myList.get(0).getThoroughfare());

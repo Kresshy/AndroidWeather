@@ -99,7 +99,7 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
 			if (splitWeather[0].equals("Partly Cloudy")) {
 				views.setImageViewResource(R.id.wicon, R.drawable.partlycloudy);
 			}
-			if (splitWeather[0].equals("Rain")) {
+			if (splitWeather[0].contains("Rain")) {
 				views.setImageViewResource(R.id.wicon, R.drawable.rain);
 			}
 			if (splitWeather[0].equals("Rain Showers")) {
@@ -136,7 +136,7 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
 			if (splitWeather[0].equals("Snow")) {
 				views.setImageViewResource(R.id.wicon, R.drawable.snow);
 			}
-			if (splitWeather[0].equals("Light snow")) {
+			if (splitWeather[0].equals("Light Snow")) {
 				views.setImageViewResource(R.id.wicon, R.drawable.snow);
 			}
 			if (splitWeather[0].equals("Snow showers")) {
