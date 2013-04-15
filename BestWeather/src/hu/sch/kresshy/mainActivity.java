@@ -241,6 +241,8 @@ public class mainActivity extends Activity implements LocationListener {
 		day3cond = (TextView) findViewById(R.id.day3wind);
 		day4cond = (TextView) findViewById(R.id.day4wind);
 
+		sp = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+		
 		if (chkStatusNoNotify()) {
 			dialog2 = ProgressDialog.show(this, "",
 					"Updating location info...", true, true);
@@ -253,13 +255,9 @@ public class mainActivity extends Activity implements LocationListener {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}
 
-		sp = getSharedPreferences(getPackageName(), MODE_PRIVATE);
-		String loadedcity = sp.getString("location", DEFAULT_CITY);
-		streetAddress = loadedcity;
+			streetAddress = sp.getString("location", DEFAULT_CITY);
 
-		if (chkStatusNoNotify()) {
 			dialog = ProgressDialog.show(this, "", "Updating weather...", true,
 					true);
 			Runnable runn = new WeatherUpdater();
@@ -308,22 +306,23 @@ public class mainActivity extends Activity implements LocationListener {
 
 		logToLogCat("mainActivity", "onCreate AlarmManager EarthquakeService");
 		// prepare Alarm Service to trigger Service
-//		Intent intent = new Intent(getApplicationContext(),
-//				EarthquakeService.class);
-//		PendingIntent pendingIntent = PendingIntent.getService(
-//				getApplicationContext(), 0, intent, 0);
-//		AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-//
-//		Calendar mycalendar = Calendar.getInstance();
-//		mycalendar.setTimeInMillis(System.currentTimeMillis());
-//		mycalendar.add(Calendar.SECOND, 10);
-//		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-//				mycalendar.getTimeInMillis(), 20 * 60 * 1000, pendingIntent);
+		// Intent intent = new Intent(getApplicationContext(),
+		// EarthquakeService.class);
+		// PendingIntent pendingIntent = PendingIntent.getService(
+		// getApplicationContext(), 0, intent, 0);
+		// AlarmManager alarmManager = (AlarmManager)
+		// getSystemService(ALARM_SERVICE);
+		//
+		// Calendar mycalendar = Calendar.getInstance();
+		// mycalendar.setTimeInMillis(System.currentTimeMillis());
+		// mycalendar.add(Calendar.SECOND, 10);
+		// alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+		// mycalendar.getTimeInMillis(), 20 * 60 * 1000, pendingIntent);
 
 		// alarmManager.set(AlarmManager.RTC_WAKEUP,
 		// System.currentTimeMillis() + 1000, pendingIntent);
 
-//		EarthquakeService.SaveAlarmManager(alarmManager, pendingIntent);
+		// EarthquakeService.SaveAlarmManager(alarmManager, pendingIntent);
 
 	}
 
@@ -429,13 +428,14 @@ public class mainActivity extends Activity implements LocationListener {
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int id) {
-//										Intent intent = new Intent(
-//												Settings.ACTION_DATA_ROAMING_SETTINGS);
-//										ComponentName cName = new ComponentName(
-//												"com.android.phone",
-//												"com.android.phone.Settings");
-//										intent.setComponent(cName);
-//										startActivityForResult(intent, 0);
+										// Intent intent = new Intent(
+										// Settings.ACTION_DATA_ROAMING_SETTINGS);
+										// ComponentName cName = new
+										// ComponentName(
+										// "com.android.phone",
+										// "com.android.phone.Settings");
+										// intent.setComponent(cName);
+										// startActivityForResult(intent, 0);
 
 									}
 								});
@@ -467,13 +467,13 @@ public class mainActivity extends Activity implements LocationListener {
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int id) {
-//									Intent intent = new Intent(
-//											Settings.ACTION_DATA_ROAMING_SETTINGS);
-//									ComponentName cName = new ComponentName(
-//											"com.android.phone",
-//											"com.android.phone.Settings");
-//									intent.setComponent(cName);
-//									startActivityForResult(intent, 0);
+									// Intent intent = new Intent(
+									// Settings.ACTION_DATA_ROAMING_SETTINGS);
+									// ComponentName cName = new ComponentName(
+									// "com.android.phone",
+									// "com.android.phone.Settings");
+									// intent.setComponent(cName);
+									// startActivityForResult(intent, 0);
 
 								}
 							});
@@ -596,15 +596,13 @@ public class mainActivity extends Activity implements LocationListener {
 				Runnable runn = new LocationByNetUpdater();
 				getLocByIPthread = new Thread(runn);
 				getLocByIPthread.start();
-			}
 
-			try {
-				getLocByIPthread.join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+				try {
+					getLocByIPthread.join();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 
-			if (chkStatusNoNotify()) {
 				dialog = ProgressDialog.show(this, "", "Updating weather...",
 						true, true);
 				Runnable runnn = new WeatherUpdater();
@@ -1558,7 +1556,7 @@ public class mainActivity extends Activity implements LocationListener {
 			drawable = res.getDrawable(R.drawable.rainandsnow);
 			return drawable;
 		}
-		if(condition.equals("Heavy Rain")) {
+		if (condition.equals("Heavy Rain")) {
 			drawable = res.getDrawable(R.drawable.rain);
 			return drawable;
 		}
