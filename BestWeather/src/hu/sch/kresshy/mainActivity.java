@@ -241,11 +241,13 @@ public class mainActivity extends Activity implements LocationListener {
 		day3cond = (TextView) findViewById(R.id.day3wind);
 		day4cond = (TextView) findViewById(R.id.day4wind);
 
-		dialog2 = ProgressDialog.show(this, "", "Updating location info...",
-				true, true);
-		Runnable runnn = new IPLocUpdater();
-		getLocByIPthread = new Thread(runnn);
-		getLocByIPthread.start();
+		if (chkStatusNoNotify()) {
+			dialog2 = ProgressDialog.show(this, "",
+					"Updating location info...", true, true);
+			Runnable runnn = new IPLocUpdater();
+			getLocByIPthread = new Thread(runnn);
+			getLocByIPthread.start();
+		}
 
 		try {
 			getLocByIPthread.join();
@@ -549,11 +551,13 @@ public class mainActivity extends Activity implements LocationListener {
 		case R.id.Networklocation:
 			logToLogCat("mainActivity", "onOptionsItemSelected Networklocation");
 
+			if (chkStatusNoNotify()) {
 			dialog2 = ProgressDialog.show(this, "",
 					"Updating location info...", true, true);
 			Runnable runn = new LocationByNetUpdater();
 			getLocByIPthread = new Thread(runn);
 			getLocByIPthread.start();
+			}
 
 			try {
 				getLocByIPthread.join();
@@ -640,13 +644,17 @@ public class mainActivity extends Activity implements LocationListener {
 			loc.city = myList.get(0).getLocality();
 		}
 
-		if (myList.get(0).getAdminArea() != null || myList.get(0).getCountryName() != null) {
-			logToLogCat("mainActivity", myList.get(0).getCountryName() + " " + myList.get(0).getSubAdminArea() + " " + myList.get(0).getAdminArea());
+		if (myList.get(0).getAdminArea() != null
+				|| myList.get(0).getCountryName() != null) {
+			logToLogCat("mainActivity", myList.get(0).getCountryName() + " "
+					+ myList.get(0).getSubAdminArea() + " "
+					+ myList.get(0).getAdminArea());
 			// return myList.get(0).getAdminArea();
-			if(myList.get(0).getCountryName().equals("United States") || myList.get(0).getCountryName() == null)
+			if (myList.get(0).getCountryName().equals("United States")
+					|| myList.get(0).getCountryName() == null)
 				loc.AdminArea = myList.get(0).getAdminArea();
 			else
-				loc.AdminArea = myList.get(0).getCountryName();	
+				loc.AdminArea = myList.get(0).getCountryName();
 		}
 
 		// logToLogCat("mainActivity", myList.get(0).getThoroughfare());
